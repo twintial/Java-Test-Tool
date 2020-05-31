@@ -43,6 +43,11 @@ public class RunTimeJavaCompiler {
         this.publicClassName = getPublicClassName(sourceCode);
     }
 
+    public RunTimeJavaCompiler(File javaFile, String publicClassName) throws IOException {
+        this.sourceCode = getSourceCode(javaFile);
+        this.publicClassName = publicClassName;
+    }
+
     public RunTimeJavaCompiler(String sourceCode, String publicClassName) {
         this(sourceCode);
         this.publicClassName = publicClassName;
@@ -68,6 +73,9 @@ public class RunTimeJavaCompiler {
      * @return 编译成功返回true，失败false
      */
     public boolean compile() {
+        if (publicClassName == null) {
+            return false;
+        }
 //        // 编译参数
 //        List<String> options = new ArrayList<>(Arrays.asList("-d", "target/classes"));
         // 自定义内容管理器
